@@ -10,6 +10,7 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.1.0",
     "@chakra-ui/next-js": "^2.1.4",
     "@chakra-ui/react": "^2.7.1",
     "@emotion/react": "^11.11.1",
@@ -29,9 +30,8 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.8",
-    "eslint": "^8.45.0",
     "@typescript-eslint/eslint-plugin": "^6.1.0",
-    "@typescript-eslint/parser": "^6.1.0"
-
+    "@typescript-eslint/parser": "^6.1.0",
+    "eslint": "^8.45.0"
   }
 }
