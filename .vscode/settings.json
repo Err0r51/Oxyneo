@@ -12,4 +12,8 @@
     "typescript.format.semicolons": "remove",
     "typescript.format.enable": true,
     "typescript.preferences.quoteStyle": "single",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "python.formatting.provider": "none",
 }

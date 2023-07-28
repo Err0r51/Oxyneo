@@ -1,28 +1,32 @@
 'use client'
 import {
-  Box, Flex, Input,
+  Box,
+  Button,
+  Flex,
+  Input,
   ListItem,
   Text,
   UnorderedList,
+  useToast,
 } from '@chakra-ui/react'
 import { SmallCloseIcon } from '@chakra-ui/icons'
 import React, { useState } from 'react'
 
-const styles = {
-  resultListWrapper: {
-    position: 'absolute',
-    top: '100%',
-    left: 0,
-    width: '100%',
-    zIndex: 1,
-    borderRadius: '4px',
-    overflow: 'hidden',
-  },
-  resultList: {
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-    padding: '0.5rem',
-  },
-}
+// const styles = {
+//   resultListWrapper: {
+//     position: 'absolute',
+//     top: '100%',
+//     left: 0,
+//     width: '100%',
+//     zIndex: 1,
+//     borderRadius: '4px',
+//     overflow: 'hidden',
+//   },
+//   resultList: {
+//     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+//     padding: '0.5rem',
+//   },
+// }
 
 interface IStock {
   name: string
@@ -46,6 +50,7 @@ const stockList: IStockDictionary = {
 export default function Home() {
   const [searchEntry, setSearchEntry] = useState('')
   const [selectedStocks, setSelectedStocks] = useState<IStock[]>([])
+  const toast = useToast()
 
   function handleSelectStock(stock: IStock) {
     if (selectedStocks.includes(stock)) {
@@ -54,6 +59,16 @@ export default function Home() {
     else {
       selectedStocks.push(stock)
       setSearchEntry('')
+      if (selectedStocks.length > 3) {
+        toast({
+          title: 'Maximum number of stocks reached',
+          // eslint-disable-next-line @typescript-eslint/quotes
+          description: "We don't recommend using more than 3 stocks at once.",
+          status: 'warning',
+          duration: 9000,
+          isClosable: true,
+        })
+      }
     }
   }
 
@@ -61,8 +76,6 @@ export default function Home() {
     setSelectedStocks(selectedStocks.filter(selectedStock => selectedStock !== stock))
   }
 
-  // 👇️ type as React.ChangeEvent<HTMLInputElement>
-  // or React.ChangeEvent<HTMLTextAreaElement> (for textarea elements)
   function handleSearch(event: React.ChangeEvent<HTMLInputElement>) {
     setSearchEntry(event.target.value)
   }
@@ -79,15 +92,22 @@ export default function Home() {
         <Flex direction="column">
           <Flex justifyContent="flex-start" flexWrap="wrap">
             {selectedStocks.map(stock => (
-              <Box
+              <Box onClick={() => handleRemoveStock(stock)}
+                display="flex"
+                flexDirection="row"
+                alignItems='center'
                 key={stock.symbol}
                 p="0.5rem"
-                borderRadius="4px"
+                borderRadius="md"
+                borderWidth={2}
+                borderColor={'orange.500'}
+                _hover={{ background: 'orange.800' }}
+
                 mr="0.5rem"
                 mb="0.5rem"
               >
                 <Text fontWeight="bold">{stock.name}</Text>
-                <SmallCloseIcon onClick={() => handleRemoveStock(stock)} />
+                <SmallCloseIcon />
               </Box>
             ))}
           </Flex>
@@ -133,6 +153,10 @@ export default function Home() {
               </Box>
             )}
           </Flex>
+        </Flex>
+        <Flex direction="row" mt="1rem" justifyContent={'space-between'}>
+          <Button variant={'outline'} color={'white'} mt="1rem"> Back </Button>
+          <Button variant={'outline'} colorScheme="orange" mt="1rem"> Next </Button>
         </Flex>
       </Box>
     </main>
