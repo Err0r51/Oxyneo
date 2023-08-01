@@ -1,0 +1,4 @@
+##Gitignore Python
+.env.local
+__pycache__/*
+.venv
