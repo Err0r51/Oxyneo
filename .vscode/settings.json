@@ -3,8 +3,9 @@
     "editor.formatOnSave": false,
     "editor.tabSize": 2,
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
+        "source.fixAll.eslint": "explicit"
     },
+
     // TypeScript formatter options
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
@@ -13,7 +14,8 @@
     "typescript.format.enable": true,
     "typescript.preferences.quoteStyle": "single",
     "[python]": {
-        "editor.defaultFormatter": "ms-python.black-formatter"
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.tabSize": 4
     },
-    "python.formatting.provider": "none",
+
 }

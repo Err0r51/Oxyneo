@@ -6,9 +6,11 @@
       "request": "launch",
       "functionName": "Oxyneo",
       "gen": "GEN_2",
-      "revision": "",
+      "revision": "1",
       "entryPoint": "getPortfolioCalculation",
-      "testInput": "main"
+      "testInput": "main",
+      "region": "europe-west1",
+      "runtime": "python312"
     }
   ]
 }
