@@ -1,37 +1,42 @@
-'use client'
-import {
-  Box, Flex, Input,
-  List,
-  ListItem,
-  ListIcon,
-  OrderedList,
-  UnorderedList,
-} from '@chakra-ui/react'
+import React from 'react'
 
-// absolut an searchbar
-// wenn results > 0 dann visible
-
-const styles = {
-  listReset: {
-    listStyleType: 'none',
-    padding: 0,
-  },
-
-}
-
-export default function Home() {
+function LoginPage() {
   return (
-    <main>
-      <Box p="12">
-        <Input placeholder='Basic usage' size='lg' />
-        <UnorderedList style={styles.listReset}>
-          <ListItem>Lorem ipsum dolor sit amet</ListItem>
-          <ListItem>Consectetur adipiscing elit</ListItem>
-          <ListItem>Integer molestie lorem at massa</ListItem>
-          <ListItem>Facilisis in pretium nisl aliquet</ListItem>
-        </UnorderedList>
-      </Box>
-
-    </main>
+    <div className="flex justify-center items-center h-screen">
+      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+            Username
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="username"
+            type="text"
+            placeholder="Enter your username"
+          />
+        </div>
+        <div className="mb-6">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+            Password
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="password"
+            type="password"
+            placeholder="Enter your password"
+          />
+        </div>
+        <div className="flex items-center justify-between">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="button"
+          >
+            Sign In
+          </button>
+        </div>
+      </form>
+    </div>
   )
 }
+
+export default LoginPage
