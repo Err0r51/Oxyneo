@@ -1,7 +1,16 @@
-import type { NextRequest } from 'next/server'
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server'
 import { updateSession } from '@/utils/supabase/middleware'
 
 export async function middleware(request: NextRequest) {
+
+  if (request.nextUrl.pathname.startsWith('/login') ||
+      request.nextUrl.pathname.startsWith('/auth/confirm') ||
+      request.nextUrl.pathname.startsWith('/_next') ||
+      request.nextUrl.pathname.startsWith('/static') || 
+      request.nextUrl.pathname === '/favicon.ico') 
+    return NextResponse.next();
+
   return await updateSession(request)
 }
 

@@ -1,59 +1,62 @@
-"use client"
+'use client'
 
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { useRouter } from 'next/navigation';
-import { FormProvider, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import Image from 'next/image';
-import cover from '/public/cover.jpg';
+// import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { useRouter } from 'next/navigation'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import Image from 'next/image'
+import cover from '/public/cover.jpg'
 
-import { useState } from 'react';
-import { revalidatePath } from 'next/cache';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { useState } from 'react'
+import { revalidatePath } from 'next/cache'
+import { createClient } from '@/utils/supabase/client'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 
 const LoginSchema = z.object({
-  email: z.string().email("Invalid email address."),
-  password: z.string().min(8, "Password is missing or too short."),
-});
+  email: z.string().email('Invalid email address.'),
+  password: z.string().min(8, 'Password is missing or too short.'),
+})
 
 export default function LoginPage() {
-  const router = useRouter();
-  const supabase = createClientComponentClient();
-  const [formError, setFormError] = useState("");
+  const router = useRouter()
+  const supabase = createClient()
+  const [formError, setFormError] = useState('')
 
   const { ...form } = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
-  });
+  })
 
   const handleSignIn = async (data: z.infer<typeof LoginSchema>) => {
-    const { email, password } = data;
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { email, password } = data
+    const { error } = await supabase.auth.signInWithPassword({ email, password })
     if (error) {
-      console.error(error.message);
-      setFormError(`Error: ${error.message}`);
-    } else {
-      revalidatePath('/', 'layout')
-      router.refresh();
+      setFormError(`Error: ${error.message}`)
     }
-  };
+    else {
+      // revalidatePath('/', 'layout')
+      router.push('/')
+    }
+  }
 
   const handleSignUp = async (data: z.infer<typeof LoginSchema>) => {
-    const { email, password } = data;
+    const { email, password } = data
     const { error } = await supabase.auth.signUp({
-      email, password
-    });
+      email,
+      password,
+    })
     if (error) {
-      console.error(error.message);
-      setFormError(`Error: ${error.message}`);
-    } else {
-      router.push("/signup-success");
+      console.error(error.message)
+      setFormError(`Error: ${error.message}`)
+    }
+    else {
+      router.push('/login/signup-success')
     }
   }
 
@@ -71,7 +74,7 @@ export default function LoginPage() {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field} />
+                    <Input placeholder="student@berkeleyfans.com" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -101,8 +104,8 @@ export default function LoginPage() {
         </Form>
       </div>
       <div className="hidden md:block md:w-2/3">
-        <Image src={cover} alt="Cover image" className="h-full w-full object-cover" />
+        <Image src={cover} priority={true} alt="Cover image" className="h-full w-full object-cover" />
       </div>
     </div>
-  );
+  )
 }
