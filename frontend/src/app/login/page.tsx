@@ -36,13 +36,12 @@ export default function LoginPage() {
   const handleSignIn = async (data: z.infer<typeof LoginSchema>) => {
     const { email, password } = data
     const { error } = await supabase.auth.signInWithPassword({ email, password })
-    if (error) {
+    if (error) 
       setFormError(`Error: ${error.message}`)
-    }
-    else {
-      // revalidatePath('/', 'layout')
+    
+    else 
       router.push('/')
-    }
+    
   }
 
   const handleSignUp = async (data: z.infer<typeof LoginSchema>) => {
