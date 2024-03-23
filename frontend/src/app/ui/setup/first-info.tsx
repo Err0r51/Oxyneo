@@ -28,7 +28,7 @@ import type { StepComponentProps } from '@/app/ui/setup/types'
 export const FirstInfo: React.FC<StepComponentProps> = ({ onNext, onBack }) => {
   const router = useRouter()
   return (
-    <Card className="w-[450px]">
+    <Card className="w-full sm:w-[450px]">
       <CardHeader>
 
         <CardTitle>Create a Portfolio</CardTitle>

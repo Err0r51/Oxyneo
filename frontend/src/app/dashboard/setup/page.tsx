@@ -39,8 +39,8 @@ const SetupWizard: React.FC = () => {
   const CurrentStepComponent = steps[currentStepIndex]
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <CurrentStepComponent onNext={onNext} onBack={onBack} />
+    <div className="flex flex-col justify-center items-center flex-grow">
+    <CurrentStepComponent onNext={onNext} onBack={onBack} />
     </div>
   )
 }

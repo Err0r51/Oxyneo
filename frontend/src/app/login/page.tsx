@@ -40,7 +40,7 @@ export default function LoginPage() {
       setFormError(`Error: ${error.message}`)
     
     else 
-      router.push('/')
+      router.push('/dashboard/setup')
     
   }
 
