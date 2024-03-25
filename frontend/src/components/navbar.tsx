@@ -1,3 +1,5 @@
+'use client'
+
 import { UserNav } from "./user-nav";
 import { NavLinks } from "@/components/nav-links"
 
@@ -11,7 +13,7 @@ export function Navbar() {
                     <NavLinks />
                 </div>
                 <div className="ml-auto flex items-center space-x-4">
-                    <UserNav username="Frede" profilePic="https://avatars.githubusercontent.com/u/19636769?v=4" />
+                    <UserNav />
                 </div>
             </div >
         </nav>
